@@ -10,3 +10,9 @@ export class Task {
   description: string;
   status: TaskStatus;
 }
+
+export type UpdateFields = {
+  title: string;
+  description: string;
+  status: TaskStatus;
+};
