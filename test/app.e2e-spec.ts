@@ -15,10 +15,20 @@ describe('AppController (e2e)', () => {
     await app.init();
   });
 
-  it('/ (GET)', () => {
-    return request(app.getHttpServer())
-      .get('/')
-      .expect(200)
-      .expect('Hello World!');
+  it('/tasks (GET)', async () => {
+    const response = await request(app.getHttpServer()).get('/tasks');
+
+    expect(response.statusCode).toEqual(200);
+
+    expect(response.body).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          id: expect.any(String),
+          title: expect.any(String),
+          description: expect.any(String),
+          status: expect.any(String),
+        }),
+      ]),
+    );
   });
 });

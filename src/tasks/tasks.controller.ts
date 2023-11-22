@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  HttpCode,
   Param,
   Patch,
   Post,
@@ -15,6 +16,7 @@ export class TasksController {
   constructor(private taskService: TasksService) {}
 
   @Get()
+  @HttpCode(200)
   tasks() {
     return this.taskService.getAllTasks();
   }
