@@ -21,6 +21,7 @@ export class TasksController {
     return this.taskService.getAllTasks();
   }
   @Post()
+  @HttpCode(200)
   createTask(@Body() newTask: CreateTaskDto) {
     const { title, description } = newTask;
     return this.taskService.createTask(title, description);
