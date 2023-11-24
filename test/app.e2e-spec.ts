@@ -53,12 +53,13 @@ describe('End to End tests for API Task List', () => {
         }),
         expect.objectContaining({
           id: expect.any(String),
-          title: expect.any(String),
-          description: expect.any(String),
+          title: postData.title,
+          description: postData.description,
           status: 'PENDING',
         }),
       ]),
     );
+    expect(response.body).toHaveLength(2);
   });
 
   afterAll(async () => {
