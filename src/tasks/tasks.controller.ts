@@ -27,6 +27,7 @@ export class TasksController {
     return this.taskService.createTask(title, description);
   }
   @Delete(':id')
+  @HttpCode(200)
   deleteTask(@Param('id') taskId: string) {
     return this.taskService.deleteTask(taskId);
   }

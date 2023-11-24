@@ -5,6 +5,15 @@ import { AppModule } from './../src/app.module';
 
 describe('End to End tests for API Task List', () => {
   let app: INestApplication;
+  const postData = {
+    title: 'Task',
+    description: 'Task 2 description',
+  };
+
+  const createTask = (): request.Test => {
+    const response = request(app.getHttpServer()).post('/tasks').send(postData);
+    return response;
+  };
 
   beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
@@ -33,13 +42,7 @@ describe('End to End tests for API Task List', () => {
   });
 
   it('/tasks (POST)', async () => {
-    const postData = {
-      title: 'Task',
-      description: 'Task 2 description',
-    };
-    const response = await request(app.getHttpServer())
-      .post('/tasks')
-      .send(postData);
+    const response = await createTask();
 
     expect(response.statusCode).toEqual(200);
 
@@ -60,6 +63,15 @@ describe('End to End tests for API Task List', () => {
       ]),
     );
     expect(response.body).toHaveLength(2);
+  });
+
+  it('/tasks (DELETE)', async () => {
+    const idToDelete = 1;
+    const response = await request(app.getHttpServer())
+      .delete(`/tasks/${idToDelete}`)
+      .send();
+    // expect(response.body).toEqual(200);
+    expect(response.body).toHaveLength(0);
   });
 
   afterAll(async () => {
