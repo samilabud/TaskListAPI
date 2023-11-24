@@ -66,12 +66,14 @@ describe('End to End tests for API Task List', () => {
   });
 
   it('/tasks (DELETE)', async () => {
-    const idToDelete = 1;
+    const responseTaskCreated = await createTask();
+    expect(responseTaskCreated.body).toHaveLength(2);
+    const idToDelete = responseTaskCreated.body[1].id;
     const response = await request(app.getHttpServer())
       .delete(`/tasks/${idToDelete}`)
       .send();
-    // expect(response.body).toEqual(200);
-    expect(response.body).toHaveLength(0);
+    expect(response.statusCode).toEqual(200);
+    expect(response.body).toHaveLength(1);
   });
 
   afterAll(async () => {
