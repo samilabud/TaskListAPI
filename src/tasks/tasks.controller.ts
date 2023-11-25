@@ -32,6 +32,7 @@ export class TasksController {
     return this.taskService.deleteTask(taskId);
   }
   @Patch(':id')
+  @HttpCode(200)
   updateTask(@Param('id') id: string, @Body() updateTask: UpdateTaskDto) {
     const { title, description, status } = updateTask;
     return this.taskService.updateTask(id, { title, description, status });

@@ -76,6 +76,27 @@ describe('End to End tests for API Task List', () => {
     expect(response.body).toHaveLength(1);
   });
 
+  it('/tasks UPDATE', async () => {
+    const updateData = {
+      title: 'Task 2',
+      description: 'Task 2 description',
+    };
+    const response = await request(app.getHttpServer())
+      .patch('/tasks/1')
+      .send(updateData);
+
+    expect(response.statusCode).toEqual(200);
+    expect(response.body).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          id: '1',
+          title: updateData.title,
+          description: updateData.description,
+        })
+      ]),
+    );
+  });
+
   afterAll(async () => {
     await app.close();
   });
