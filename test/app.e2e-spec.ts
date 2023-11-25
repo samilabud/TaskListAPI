@@ -92,7 +92,7 @@ describe('End to End tests for API Task List', () => {
           id: '1',
           title: updateData.title,
           description: updateData.description,
-        })
+        }),
       ]),
     );
   });
