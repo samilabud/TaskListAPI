@@ -7,6 +7,9 @@ services:
       - "3006:3000"
     links:
       - monguito
+    environment:
+      - DATABASE_HOST=mongodb://admin:123456@monguito:27017/tasklistdb?authSource=admin
+      #prod -> mongodb://lactaconsejosusr:y9ku6E0LnDEPWat8@lactaconsejoscluster.ceqb5xi.mongodb.net/?retryWrites=true&w=majority
   monguito:
     image: mongo
     ports:

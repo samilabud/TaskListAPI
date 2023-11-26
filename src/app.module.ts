@@ -1,12 +1,13 @@
 import { Module } from '@nestjs/common';
 import { TasksModule } from './tasks/tasks.module';
 import { MongooseModule } from '@nestjs/mongoose';
+import { ConfigModule } from '@nestjs/config';
+
 @Module({
   imports: [
     TasksModule,
-    MongooseModule.forRoot(
-      'mongodb://admin:123456@monguito:27017/tasklistdb?authSource=admin',
-    ),
+    MongooseModule.forRoot(process.env.DATABASE_HOST),
+    ConfigModule.forRoot(),
   ],
   controllers: [],
   providers: [],

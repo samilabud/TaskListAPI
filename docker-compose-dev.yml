@@ -12,6 +12,8 @@ services:
     volumes:
       - ./:/home/app
     command: npm run start:dev
+    environment:
+      - DATABASE_HOST=mongodb://admin:123456@monguito:27017/tasklistdb?authSource=admin
   monguito:
     image: mongo
     ports:
