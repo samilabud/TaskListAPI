@@ -5,7 +5,7 @@ import { MongooseModule } from '@nestjs/mongoose';
   imports: [
     TasksModule,
     MongooseModule.forRoot(
-      'mongodb://admin:123456@localhost:27018/tasklistdb?authSource=admin',
+      'mongodb://admin:123456@monguito:27017/tasklistdb?authSource=admin',
     ),
   ],
   controllers: [],

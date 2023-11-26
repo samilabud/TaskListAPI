@@ -1,0 +1,27 @@
+version: "3.9"
+services:
+  tasklistnode:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3005:3000"
+      - "3006:3000"
+    links:
+      - monguito
+    volumes:
+      - ./:/home/app
+    command: npm run start:dev
+  monguito:
+    image: mongo
+    ports:
+      - "27018:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=123456
+    volumes:
+      - mongo-data:/data/db
+      #mysql -> /var/lib/mysql
+      # postgres -> /var/lib/postgresql/data
+volumes:
+  mongo-data:
