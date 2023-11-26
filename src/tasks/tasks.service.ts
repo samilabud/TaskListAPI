@@ -1,8 +1,18 @@
 import { Injectable } from '@nestjs/common';
 import { Task, TaskStatus, UpdateFields } from './task.entity';
 import { v4 } from 'uuid';
+
+import { Model } from 'mongoose';
+import { InjectModel } from '@nestjs/mongoose';
+import { Task as TaskMongoEntity } from './schemas/task.schema';
+
 @Injectable()
 export class TasksService {
+  constructor(
+    @InjectModel(TaskMongoEntity.name)
+    private taskModel: Model<TaskMongoEntity>,
+  ) {}
+
   private tasks: Task[] = [
     {
       id: '1',
@@ -35,5 +45,14 @@ export class TasksService {
   deleteTask(id: string) {
     this.tasks = this.tasks.filter((task) => task.id !== id);
     return this.tasks;
+  }
+
+  createMongoTask() {
+    const createdCat = new this.taskModel({
+      title: 'test nestjs',
+      description: 'test description',
+      status: 'PENDING',
+    });
+    return createdCat.save();
   }
 }

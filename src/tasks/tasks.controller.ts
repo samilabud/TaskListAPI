@@ -37,4 +37,10 @@ export class TasksController {
     const { title, description, status } = updateTask;
     return this.taskService.updateTask(id, { title, description, status });
   }
+
+  @Get('/test')
+  testMongoDB() {
+    this.taskService.createMongoTask();
+    return 'it is working';
+  }
 }
