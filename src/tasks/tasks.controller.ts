@@ -39,7 +39,7 @@ export class TasksController {
   }
 
   @Get('/test')
-  testMongoDB() {
+  createTaskInMongo() {
     this.taskService.createMongoTask();
     return 'it is working';
   }
