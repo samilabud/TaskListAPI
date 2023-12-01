@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Task, TaskStatus, UpdateFields } from './task.entity';
 import { v4 } from 'uuid';
-
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { Task as TaskMongoEntity } from './schemas/task.schema';
@@ -47,6 +46,9 @@ export class TasksService {
     return this.tasks;
   }
 
+  getAllFromMongoTask() {
+    return this.taskModel.find().exec();
+  }
   createMongoTask() {
     const createdCat = new this.taskModel({
       title: 'Test in nestjs',
@@ -54,5 +56,9 @@ export class TasksService {
       status: 'PENDING',
     });
     return createdCat.save();
+  }
+
+  updateMongoTask(id: string, updateFields: UpdateFields) {
+    return this.taskModel.updateOne({ _id: id }, updateFields).exec();
   }
 }

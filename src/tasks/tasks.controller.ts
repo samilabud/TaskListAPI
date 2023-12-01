@@ -39,8 +39,21 @@ export class TasksController {
   }
 
   @Get('/test')
+  getTasksInMongo() {
+    return this.taskService.getAllFromMongoTask();
+  }
+
+  @Post('/test')
   createTaskInMongo() {
     this.taskService.createMongoTask();
     return 'it is working';
+  }
+
+  @Patch('/test/:id')
+  updateTaskInMongo(
+    @Param('id') id: string,
+    @Body() updateTask: UpdateTaskDto,
+  ) {
+    return this.taskService.updateMongoTask(id, updateTask);
   }
 }
