@@ -49,7 +49,7 @@ export class TasksService {
 
   createMongoTask() {
     const createdCat = new this.taskModel({
-      title: 'test nestjs',
+      title: 'Test in nestjs',
       description: 'test description',
       status: 'PENDING',
     });
