@@ -62,4 +62,8 @@ export class TasksService {
   updateMongoTask(id: string, updateFields: UpdateFields) {
     return this.taskModel.updateOne({ _id: id }, updateFields).exec();
   }
+
+  deleteMongoTask(id: string) {
+    return this.taskModel.deleteOne({ _id: id }).exec();
+  }
 }
