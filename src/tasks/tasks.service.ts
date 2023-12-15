@@ -49,6 +49,7 @@ export class TasksService {
   getAllFromMongoTask() {
     return this.taskModel.find().exec();
   }
+
   createMongoTask() {
     const createdCat = new this.taskModel({
       owner: 'samilabud@gmail.com',

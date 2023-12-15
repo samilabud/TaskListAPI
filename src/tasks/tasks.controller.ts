@@ -56,4 +56,9 @@ export class TasksController {
   ) {
     return this.taskService.updateMongoTask(id, updateTask);
   }
+
+  @Delete('/test/:id')
+  deleteTaskInMongo(@Param('id') id: string) {
+    return this.taskService.deleteMongoTask(id);
+  }
 }
